@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+     <!-- naviagtion bar -->
+     <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="#" class="logo">DisasterSafe</a>
+                <span class="tagline">"Prepared Today for a Safer Tomorrow"</span>
+            </div>
+            <div class="nav-links">
+                <a href="#dashboard">Dashboard</a>
+                <a href="#predict">Predict</a>
+                <a href="#temperature">Temperature</a>
+                <a href="#prepare">Prepare</a>
+                <a href="#about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <div class="alert-bar" id="liveAlert">
+        Loading area status...
+    </div>
+
+    <div class="container">
+        <!-- Prediction Section -->
+        <div class="card" id="predict">
+            <h2>Disaster Prediction</h2>
+            <div class="prediction-form">
+                <input type="text" id="predictLocation" placeholder="Enter location">
+                <select id="disasterType">
+                    <option value="">Select disaster type</option>
+                    <option value="flood">Flood</option>
+                    <option value="earthquake">Earthquake</option>
+                    <option value="hurricane">Hurricane</option>
+                </select>
+                <button onclick="runPrediction()">Predict Risk</button>
+                <div id="predictionOutput" class="result-box"></div>
+            </div>
+        </div>
+
+        <!-- Weather Section -->
+        <div class="card" id="temperature">
+            <h2>Weather Monitoring</h2>
+            <div class="temperature-form">
+                <input type="text" id="tempLocation" placeholder="Enter location">
+                <div class="button-group">
+                    <button onclick="getCurrentWeather()">Current Weather</button>
+                    <button onclick="get7DayForecast()">7-Day Forecast</button>
+                </div>
+                <div id="weatherDisplay">
+                    <div class="temperature-display">
+                        <span class="weather-emoji" id="currentEmoji"></span>
+                        <div id="currentTemp"></div>
+                    </div>
+                    <div class="weather-details" id="currentDetails"></div>
+                    <div class="forecast-container" id="forecastContainer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preparation Section -->
+        <div class="card" id="prepare">
+            <h2>Emergency Preparation</h2>
+            <div class="preparation-form">
+                <select id="disasterSelect">
+                    <option value="">Select Disaster Type</option>
+                    <option value="earthquake">Earthquake</option>
+                    <option value="flood">Flood</option>
+                    <option value="hurricane">Hurricane</option>
+                    <option value="wildfire">Wildfire</option>
+                    <option value="tornado">Tornado</option>
+                </select>
+                <button onclick="showPrecautions()">Show Safety Measures</button>
+                <div id="precautionsContainer" class="result-box"></div>
+            </div>
+        </div>
+    </div>
+
+     <!-- About Section -->
+     <div class="card about-section" id="about">
+        <div class="about-content">
+            <h2>About DisasterSafe</h2>
+            <p>We are a team of emergency management professionals dedicated to saving lives through predictive technology and community preparedness.</p>
+             
+            <button><a href="about.html" style="color:white;text-decoration:none;font-weight: bolder;">Click here to know more</a></button>
+            <div class="about-features">
+                <div class="feature-card">
+                    <h3>24/7 Monitoring</h3>
+                    <p>Real-time tracking of environmental conditions and potential threats</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Expert Support</h3>
+                    <p>Access to emergency response professionals and resources</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Community Driven</h3>
+                    <p>Collaborative platform for local preparedness initiatives</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Chatbot Elements -->
+    <div class="chatbot-toggle" onclick="toggleChatbot()">🤖</div>
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header" onclick="toggleChatbot()">
+            <h3>Emergency Assistant</h3>
+            <span>×</span>
+        </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chat-message bot-message">
+                Hello! I'm your Emergency Assistant. Ask me about disaster preparedness or current alerts!
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

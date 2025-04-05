@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DisasterSafe - Life Protection Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2d3436;
+            --secondary-color: #0984e3;
+            --accent-color: #74b9ff;
+            --success-color: #00b894;
+            --text-color: #333;
+            --gradient-bg: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: var(--gradient-bg);
+            border-radius: 2px;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 60px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Impact Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-bg);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .stat-card.in-view .stat-number {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Features Section */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            padding: 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Roadmap Section */
+        .roadmap-timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            width: 45%;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            margin: 40px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 55%;
+        }
+
+        .timeline-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 40px;
+            background: var(--gradient-bg);
+            color: white;
+            border-radius: 30px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 18px 45px;
+            background: white;
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 40px;
+            margin: 25px 15px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 1200px) {
+            .about-container {
+                padding: 60px 20px;
+            }
+            
+            .section-title {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mission-section {
+                padding: 40px;
+            }
+            
+            .timeline-item {
+                width: 90%;
+                margin-left: 5% !important;
+            }
+            
+            .timeline-line {
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                width: 100%;
+                margin: 15px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="about-container">
+        <h1 class="section-title">Protecting Lives with DisasterSafe</h1>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <h2>Our Life-Saving Mission</h2>
+            <p>DisasterSafe is committed to preserving childhoods and livelihoods through cutting-edge early warning systems. We combine AI-powered predictions with community-driven action to create a world where no life is lost to preventable disasters.</p>
+        </section>
+
+        <!-- Impact Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-child fa-3x" style="color: #00b894"></i>
+                <div class="stat-number">1.2M+</div>
+                <p>Children Protected</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-bell fa-3x" style="color: #0984e3"></i>
+                <div class="stat-number">45K+</div>
+                <p>Early Warnings Issued</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-home fa-3x" style="color: #74b9ff"></i>
+                <div class="stat-number">680K+</div>
+                <p>Livelihoods Protected</p>
+            </div>
+        </div>
+
+        <!-- Technology Features -->
+        <section class="features-section">
+            <h2 class="section-title">Innovative Protection Systems</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3><i class="fas fa-brain"></i> AI Prediction Models</h3>
+                    <p>Advanced machine learning for accurate disaster forecasting</p>
+                </div>
+                <div class="feature-item">
+                    <h3><i class="fas fa-mobile-alt"></i> Community Alerts</h3>
+                    <p>Multi-channel notification system reaching remote areas</p>
+                </div>
+                <div class="feature-item">
+                    <h3><i class="fas fa-school"></i> Child Safety Programs</h3>
+                    <p>Specialized disaster education and evacuation plans</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Roadmap -->
+        <section class="roadmap-section">
+            <h2 class="section-title">Future Enhancements</h2>
+            <div class="roadmap-timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <h3>2024 Q4</h3>
+                    <p>Global Satellite Monitoring Integration</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2025 Q1</h3>
+                    <p>Mobile App with AR Evacuation Guides</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2025 Q3</h3>
+                    <p>AI-Powered Rescue Drone Network</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Join Our Life-Saving Mission</h2>
+                <p>Be part of the global protection network</p>
+                <a href="#alerts" class="cta-button">
+                    <i class="fas fa-shield-alt"></i> Get Protected
+                </a>
+                <a href="#partners" class="cta-button">
+                    <i class="fas fa-handshake"></i> Partner With Us
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.25 });
+
+        document.querySelectorAll('.stat-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Number animation for stats
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = +stat.innerText;
+            let count = 0;
+            const updateCount = () => {
+                const increment = target / 50;
+                if(count < target) {
+                    count += increment;
+                    stat.innerText = Math.ceil(count) + '+';
+                    requestAnimationFrame(updateCount);
+                }
+            }
+            updateCount();
+        });
+    </script>
+</body>
+</html>
